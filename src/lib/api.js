@@ -1,7 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 // real uri - https://aidf-horizone-hotel-managment-backend.onrender.com
-const BACKEND_URL = "http://localhost:5000";
+// const BACKEND_URL = "http://localhost:5000";
+const BACKEND_URL = "https://aidf-horizone-hotel-managment-backend.onrender.com";
 
 export const api = createApi({
   reducerPath: "api",
