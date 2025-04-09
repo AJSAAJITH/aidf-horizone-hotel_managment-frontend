@@ -12,10 +12,12 @@ import HotelsPage from "./pages/hotels.page";
 import { store } from './lib/store';
 import { Provider } from "react-redux";
 import CreateHotelPage from "./pages/create.hotel.page";
+import Completepayment from "./pages/complete.page";
 import { ClerkProvider } from "@clerk/clerk-react";
 import AccoutnPage from "./pages/accoutn-page";
 import ProtectedRouteLayout from "./layouts/protected-route-layout";
 import AdminProtectedLayout from "./layouts/admin-protected-layout";
+import PaymentPage from "./pages/payment.page";
 
 // Import your Publishable Key
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
@@ -42,6 +44,8 @@ createRoot(document.getElementById("root")).render(
                   </Route>
 
                   <Route path="/account" element={<AccoutnPage />} />
+                  <Route path="/booking/payment" element={<PaymentPage />} />
+                  <Route path="/booking/complete" element={<Completepayment />} />
                 </Route>
 
               </Route>

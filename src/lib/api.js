@@ -40,6 +40,13 @@ export const api = createApi({
         body: booking,
       }),
     }),
+    getBookingById: builder.query({
+      query: (id) => `bookings/${id}`,
+
+    }),
+    getCheckoutSessionStatus: builder.query({
+      query: (sessionId) => `payments/session-status?session_id=${sessionId}`,
+    }),
   }),
 });
 
@@ -48,5 +55,7 @@ export const {
   useGetHotelByIdQuery,
   useGetHotelsForSearchQueryQuery,
   useCreateHotelMutation,
-  useCreateBookingMutation
+  useCreateBookingMutation,
+  useGetBookingByIdQuery,
+  useGetCheckoutSessionStatusQuery,
 } = api; // Use `api` instead of `API`

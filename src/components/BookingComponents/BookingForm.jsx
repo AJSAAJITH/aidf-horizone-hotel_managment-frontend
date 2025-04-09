@@ -16,7 +16,7 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { useLocation, useParams } from "react-router"
+import { useLocation, useNavigate, useParams } from "react-router"
 import { useCreateBookingMutation, useGetHotelByIdQuery } from "@/lib/api"
 import { toast } from "sonner"
 
@@ -69,11 +69,13 @@ export function BookingForm() {
     const getTotalNights =
         (new Date(checkoutDate) - new Date(checkinDate)) / (1000 * 60 * 60 * 24);
 
+    const navigate = useNavigate();
     const onSubmit = async (data) => {
+
         const { customer_name, phone, room_count, checkin, checkout } = data;
         try {
             const toastId = toast.loading("Booking in Progress...");
-            await createBooking({
+            const booking = await createBooking({
                 hotelId: id,
                 checkIn: checkin,
                 checkOut: checkout,
@@ -83,6 +85,9 @@ export function BookingForm() {
             }).unwrap()
             toast.dismiss(toastId);
             toast.success("Booking created successfully!");
+
+            // Redirect to payment page with booking ID
+            navigate(`/booking/payment?bookingId=${booking.data._id}`);
             cleardata();
         } catch (error) {
             toast.error("Booking creation failed. Please try again.");
