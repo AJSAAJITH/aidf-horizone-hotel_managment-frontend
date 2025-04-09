@@ -32,7 +32,7 @@ const formSchema = z.object({
         .min(1, "Phone number is required.")
         .regex(/^\+?\d{10,15}$/, "Invalid phone number. Include country code."),
 
-    room_count: z
+    rooms_count: z
         .number({ invalid_type_error: "Room count must be a number." })
         .min(1, "Must book at least 1 room."),
 
@@ -58,7 +58,7 @@ export function BookingForm() {
         defaultValues: {
             customer_name: "",
             phone: "",
-            room_count: 1,
+            rooms_count: 1,
             checkin: today,
             checkout: tomorrow,
         },
@@ -72,7 +72,7 @@ export function BookingForm() {
     const navigate = useNavigate();
     const onSubmit = async (data) => {
 
-        const { customer_name, phone, room_count, checkin, checkout } = data;
+        const { customer_name, phone, rooms_count, checkin, checkout } = data;
         try {
             const toastId = toast.loading("Booking in Progress...");
             const booking = await createBooking({
@@ -81,7 +81,7 @@ export function BookingForm() {
                 checkOut: checkout,
                 customer_name: customer_name,
                 phone: phone,
-                rooms_count: room_count
+                rooms_count: rooms_count
             }).unwrap()
             toast.dismiss(toastId);
             toast.success("Booking created successfully!");
@@ -99,7 +99,7 @@ export function BookingForm() {
         form.reset({
             customer_name: "",
             phone: "",
-            room_count: 1,
+            rooms_count: 1,
             checkin: today,
             checkout: tomorrow,
         });
@@ -144,7 +144,7 @@ export function BookingForm() {
 
                     <FormField
                         control={form.control}
-                        name="room_count"
+                        name="rooms_count"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Rooms</FormLabel>

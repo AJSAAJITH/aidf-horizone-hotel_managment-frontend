@@ -9,7 +9,7 @@ export const api = createApi({
     baseUrl: `${BACKEND_URL}/api/`,
     prepareHeaders: async (headers, getState) => {  // Corrected function signature
       const token = await window?.Clerk?.session?.getToken();
-      console.log(token);
+      console.log("Clark API Token", token);
       if (token) {
         headers.set("Authorization", `Bearer ${token}`);
       }
